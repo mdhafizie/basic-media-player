@@ -46,8 +46,7 @@ class MainActivity : AppCompatActivity() {
             binding.btnPlay.setOnClickListener {
                 if (!videoUrl.isNullOrBlank()) {
                     val intent = Intent(this, VideoPlayerActivity::class.java).apply {
-                        //putExtra(Constants.VIDEO_URL_KEY, videoUrl)
-                        putExtra(Constants.VIDEO_URL_KEY, "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")
+                        putExtra(Constants.VIDEO_URL_KEY, videoUrl)
                         flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                     }
                     startActivity(intent)
@@ -72,24 +71,3 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 }
-
-/*
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.basicmediaplayer.android.R
-
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-}*/

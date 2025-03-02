@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Basic  Media Player Pip App</string>
+    <string name="enter_pip_mode">Enter PiP Mode</string>
+    <string name="video_player_app">Video Player App</string>
+    <string name="play_video">Play Video</string>
+    <string name="fullscreen">full screen</string>
+    <string name="play_pause">pause</string>
+    <string name="seek_forward">seek forward</string>
+    <string name="seek_backward">seek backward</string>
+    <string name="cancel">cancel</string>
 </resources>

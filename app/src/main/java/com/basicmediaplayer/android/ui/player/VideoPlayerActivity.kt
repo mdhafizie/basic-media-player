@@ -10,6 +10,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.basicmediaplayer.android.databinding.ActivityVideoPlayerBinding
 import com.basicmediaplayer.android.service.FloatingVideoService
+import com.basicmediaplayer.android.util.AppUtils.isValidUrl
+import com.basicmediaplayer.android.util.AppUtils.showToast
 import com.basicmediaplayer.android.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,6 +30,12 @@ class VideoPlayerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         videoUrl = intent.getStringExtra(Constants.VIDEO_URL_KEY)
+        if (videoUrl.isNullOrBlank() || !isValidUrl(videoUrl!!)) {
+            showToast(this,"Invalid video URL")
+            finish()
+            return
+        }
+
         if (videoUrl != null) {
             setupPlayer(videoUrl)
         }

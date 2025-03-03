@@ -12,6 +12,7 @@ import com.basicmediaplayer.android.R
 import com.basicmediaplayer.android.databinding.ActivityMainBinding
 import com.basicmediaplayer.android.ui.player.PlayerManager
 import com.basicmediaplayer.android.ui.player.VideoPlayerActivity
+import com.basicmediaplayer.android.util.AppUtils
 import com.basicmediaplayer.android.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -44,14 +45,23 @@ class MainActivity : AppCompatActivity() {
         // Observe video URL once and update UI accordingly
         videoViewModel.getVideoUrl().observe(this) { videoUrl ->
             binding.btnPlay.setOnClickListener {
-                if (!videoUrl.isNullOrBlank()) {
-                    val intent = Intent(this, VideoPlayerActivity::class.java).apply {
-                        putExtra(Constants.VIDEO_URL_KEY, videoUrl)
-                        flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                if (!AppUtils.checkInternetAndShowToast(this)) return@setOnClickListener
+
+                if (!AppUtils.isValidUrl(videoUrl)) {
+                    AppUtils.showToast(this, "Invalid video URL format")
+                    return@setOnClickListener
+                }
+
+                AppUtils.checkUrlReachable(videoUrl) { isReachable ->
+                    if (isReachable) {
+                        val intent = Intent(this, VideoPlayerActivity::class.java).apply {
+                            putExtra(Constants.VIDEO_URL_KEY, videoUrl)
+                            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        }
+                        startActivity(intent)
+                    } else {
+                        AppUtils.showToast(this, "Invalid or unreachable video URL")
                     }
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this, "Invalid video URL", Toast.LENGTH_SHORT).show()
                 }
             }
         }

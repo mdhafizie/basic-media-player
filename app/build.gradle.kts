@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId = "com.basicmediaplayer.android"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -53,28 +53,27 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // ExoPlayer for video playback
-    implementation("com.google.android.exoplayer:exoplayer:2.19.0")
-    implementation("com.google.android.exoplayer:exoplayer-ui:2.19.0")
-
+    implementation(libs.exoplayer)
+    implementation(libs.exoplayer.ui)
 
     // Retrofit for network requests
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     // Gson for JSON parsing
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation(libs.gson)
 
     // Lifecycle components (ViewModel & LiveData)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     // Kotlin Coroutines for async tasks
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation(libs.kotlinx.coroutines.android)
 
     // Picture-in-Picture (PiP) mode support
-    implementation("androidx.annotation:annotation:1.7.0")
+    implementation(libs.androidx.annotation)
 
     // Dependency injection (optional)
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 }
